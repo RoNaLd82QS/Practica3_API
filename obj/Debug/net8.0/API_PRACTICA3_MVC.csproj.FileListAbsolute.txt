@@ -1,0 +1,8 @@
+C:\Users\RONALD\Desktop\Programacion\API_Practica3\API_PRACTICA3_MVC\obj\Debug\net8.0\API_PRACTICA3_MVC.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\RONALD\Desktop\Programacion\API_Practica3\API_PRACTICA3_MVC\obj\Debug\net8.0\API_PRACTICA3_MVC.AssemblyInfoInputs.cache
+C:\Users\RONALD\Desktop\Programacion\API_Practica3\API_PRACTICA3_MVC\obj\Debug\net8.0\API_PRACTICA3_MVC.AssemblyInfo.cs
+C:\Users\RONALD\Desktop\Programacion\API_Practica3\API_PRACTICA3_MVC\obj\Debug\net8.0\API_PRACTICA3_MVC.csproj.CoreCompileInputs.cache
+C:\Users\RONALD\Desktop\Programacion\API_Practica3\API_PRACTICA3_MVC\obj\Debug\net8.0\API_PRACTICA3_MVC.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\RONALD\Desktop\Programacion\API_Practica3\API_PRACTICA3_MVC\obj\Debug\net8.0\API_PRACTICA3_MVC.RazorAssemblyInfo.cache
+C:\Users\RONALD\Desktop\Programacion\API_Practica3\API_PRACTICA3_MVC\obj\Debug\net8.0\API_PRACTICA3_MVC.RazorAssemblyInfo.cs
+C:\Users\RONALD\Desktop\Programacion\API_Practica3\API_PRACTICA3_MVC\obj\Debug\net8.0\API_PRACTICA3_MVC.sourcelink.json

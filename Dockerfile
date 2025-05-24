@@ -1,24 +1,24 @@
-# Etapa 1: Build
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-WORKDIR /app
-EXPOSE 8080
-
+# Etapa de compilación
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
+WORKDIR /app
 
-# Copiar el .csproj y restaurar dependencias
-COPY ["API_PRACTICA3.csproj", "./"]
+# Copiar archivos del proyecto y restaurar dependencias
+COPY *.sln .
+COPY API_PRACTICA3_MVC/*.csproj ./API_PRACTICA3_MVC/
 RUN dotnet restore
 
-# Copiar el resto de archivos y compilar
+# Copiar el resto de los archivos y compilar
 COPY . .
-RUN dotnet publish -c Release -o /app/publish
+WORKDIR /app/API_PRACTICA3_MVC
+RUN dotnet publish -c Release -o out
 
-# Etapa 2: Runtime
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+# Etapa de ejecución
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
-COPY --from=build /app/publish .
+COPY --from=build /app/API_PRACTICA3_MVC/out ./
 
-ENV ASPNETCORE_URLS=http://+:$PORT
+# Configurar la variable de entorno para el puerto
+ENV ASPNETCORE_URLS=http://+:10000
+EXPOSE 10000
 
-ENTRYPOINT ["dotnet", "API_PRACTICA3.dll"]
+ENTRYPOINT ["dotnet", "API_PRACTICA3_MVC.dll"]

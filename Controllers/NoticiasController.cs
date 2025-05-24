@@ -1,32 +1,57 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using API_PRACTICA3_MVC.Models;
+using API_PRACTICA3_MVC.Servicios;
+using API_PRACTICA3_MVC.Datos;
 
 namespace API_PRACTICA3_MVC.Controllers
 {
-    [Route("[controller]")]
     public class NoticiasController : Controller
     {
-        private readonly ILogger<NoticiasController> _logger;
+        private readonly ServicioPostal _servicio;
+        private readonly FeedbackDbContext _context;
 
-        public NoticiasController(ILogger<NoticiasController> logger)
+        public NoticiasController(ServicioPostal servicio, FeedbackDbContext context)
         {
-            _logger = logger;
+            _servicio = servicio;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Indice()
         {
-            return View();
+            var posts = await _servicio.ObtenerPostsAsync();
+            return View(posts);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public async Task<IActionResult> Detalle(int id)
         {
-            return View("Error!");
+            var post = await _servicio.ObtenerPost(id);
+            var usuario = await _servicio.ObtenerUsuario(post.UserId);
+            var comentarios = await _servicio.ObtenerComentarios(id);
+            var feedback = await _context.Feedbacks.FirstOrDefaultAsync(f => f.PostId == id);
+
+            ViewData["Usuario"] = usuario;
+            ViewData["Comentarios"] = comentarios;
+            ViewData["Feedback"] = feedback?.Sentimiento;
+
+            return View(post);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Reaccionar(int postId, string tipo)
+        {
+            var existe = await _context.Feedbacks.AnyAsync(f => f.PostId == postId);
+            if (!existe)
+            {
+                var feedback = new Feedback
+                {
+                    PostId = postId,
+                    Sentimiento = tipo,
+                    Fecha = DateTime.Now
+                };
+                _context.Feedbacks.Add(feedback);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Detalle", new { id = postId });
         }
     }
 }
