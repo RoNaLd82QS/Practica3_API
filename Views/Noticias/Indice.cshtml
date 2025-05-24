@@ -6,13 +6,27 @@
 
 <h2>Noticias recientes</h2>
 
-<ul>
+@if (Model == null || !Model.Any())
+{
+    <p>No hay publicaciones disponibles.</p>
+}
+else
+{
+    <ul>
 @foreach (var post in Model)
 {
-    <li>
+    <li class="mb-4">
         <h4>@post.Title</h4>
-        <p>@post.Body.Substring(0, Math.Min(100, post.Body.Length))...</p>
-        <a class="btn btn-primary" asp-controller="Noticias" asp-action="Detalle" asp-route-id="@post.Id">Leer más</a>
+        <p>
+            @(string.IsNullOrWhiteSpace(post.Body)
+                ? "(sin contenido)"
+                : (post.Body.Length > 100
+                    ? post.Body.Substring(0, 100) + "..."
+                    : post.Body))
+        </p>
+        <a class="btn btn-primary" asp-action="Detalle" asp-route-id="@post.Id">Leer más</a>
     </li>
 }
 </ul>
+
+}

@@ -13,10 +13,16 @@ namespace API_PRACTICA3_MVC.Servicios
         }
 
         public async Task<List<Post>> ObtenerPostsAsync()
-        {
-            var response = await _http.GetStringAsync("https://jsonplaceholder.typicode.com/posts");
-            return JsonSerializer.Deserialize<List<Post>>(response) ?? new();
-        }
+{
+    var response = await _http.GetStringAsync("https://jsonplaceholder.typicode.com/posts");
+    var options = new JsonSerializerOptions
+    {
+        PropertyNameCaseInsensitive = true
+    };
+    return JsonSerializer.Deserialize<List<Post>>(response, options) ?? new List<Post>();
+}
+
+
 
         public async Task<Post> ObtenerPost(int id)
         {
