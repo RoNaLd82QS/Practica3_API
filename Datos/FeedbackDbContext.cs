@@ -8,10 +8,5 @@ namespace API_PRACTICA3_MVC.Datos
         public FeedbackDbContext(DbContextOptions<FeedbackDbContext> options) : base(options) { }
 
         public DbSet<Feedback> Feedbacks { get; set; }
-
-        internal async Task SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

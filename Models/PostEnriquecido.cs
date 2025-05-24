@@ -8,7 +8,8 @@ namespace API_PRACTICA3_MVC.Models
     public class PostEnriquecido
     {
     public Post? Post { get; set; }
-    public User Autor { get; set; }
-    public List<Comment> Comentarios { get; set; }    
+    public Usuario? Autor { get; set; }
+public List<Comentario>? Comentarios { get; set; }
+
     }
 }

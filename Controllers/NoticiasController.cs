@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using API_PRACTICA3_MVC.Models;
 using API_PRACTICA3_MVC.Servicios;
 using API_PRACTICA3_MVC.Datos;
+using Microsoft.EntityFrameworkCore;
 
+//crerar mejorar 
 namespace API_PRACTICA3_MVC.Controllers
 {
     public class NoticiasController : Controller
