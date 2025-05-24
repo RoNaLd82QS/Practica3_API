@@ -6,6 +6,10 @@ namespace API_PRACTICA3_MVC.Servicios
     public class ServicioPostal
     {
         private readonly HttpClient _http;
+        private readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
 
         public ServicioPostal(HttpClient http)
         {
@@ -13,33 +17,56 @@ namespace API_PRACTICA3_MVC.Servicios
         }
 
         public async Task<List<Post>> ObtenerPostsAsync()
-{
-    var response = await _http.GetStringAsync("https://jsonplaceholder.typicode.com/posts");
-    var options = new JsonSerializerOptions
-    {
-        PropertyNameCaseInsensitive = true
-    };
-    return JsonSerializer.Deserialize<List<Post>>(response, options) ?? new List<Post>();
-}
-
-
-
-        public async Task<Post> ObtenerPost(int id)
         {
-            var response = await _http.GetStringAsync($"https://jsonplaceholder.typicode.com/posts/{id}");
-            return JsonSerializer.Deserialize<Post>(response);
+            try
+            {
+                var response = await _http.GetStringAsync("https://jsonplaceholder.typicode.com/posts");
+                return JsonSerializer.Deserialize<List<Post>>(response, _jsonOptions) ?? new List<Post>();
+            }
+            catch (Exception ex)
+            {
+                // Log opcional: Console.WriteLine($"Error al obtener posts: {ex.Message}");
+                return new List<Post>();
+            }
+        }
+
+        public async Task<Post?> ObtenerPost(int id)
+        {
+            try
+            {
+                var response = await _http.GetStringAsync($"https://jsonplaceholder.typicode.com/posts/{id}");
+                return JsonSerializer.Deserialize<Post>(response, _jsonOptions);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public async Task<List<Comentario>> ObtenerComentarios(int postId)
         {
-            var response = await _http.GetStringAsync($"https://jsonplaceholder.typicode.com/comments?postId={postId}");
-            return JsonSerializer.Deserialize<List<Comentario>>(response);
+            try
+            {
+                var response = await _http.GetStringAsync($"https://jsonplaceholder.typicode.com/comments?postId={postId}");
+                return JsonSerializer.Deserialize<List<Comentario>>(response, _jsonOptions) ?? new List<Comentario>();
+            }
+            catch
+            {
+                return new List<Comentario>();
+            }
         }
 
-        public async Task<Usuario> ObtenerUsuario(int userId)
+        public async Task<Usuario?> ObtenerUsuario(int userId)
         {
-            var response = await _http.GetStringAsync($"https://jsonplaceholder.typicode.com/users/{userId}");
-            return JsonSerializer.Deserialize<Usuario>(response);
+            try
+            {
+                var response = await _http.GetStringAsync($"https://jsonplaceholder.typicode.com/users/{userId}");
+                return JsonSerializer.Deserialize<Usuario>(response, _jsonOptions);
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

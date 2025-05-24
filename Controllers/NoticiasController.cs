@@ -20,17 +20,15 @@ namespace API_PRACTICA3_MVC.Controllers
         // GET: /Noticias/Indice
         public async Task<IActionResult> Indice()
         {
-            try
+            var posts = await _servicio.ObtenerPostsAsync();
+
+            if (posts == null || !posts.Any())
             {
-                var posts = await _servicio.ObtenerPostsAsync();
-                return View(posts ?? new List<Post>());
-            }
-            catch (Exception ex)
-            {
-                // Loguear el error si se desea
-                ViewData["Error"] = "No se pudieron cargar las publicaciones.";
+                TempData["Error"] = "No se pudieron cargar las publicaciones.";
                 return View(new List<Post>());
             }
+
+            return View(posts);
         }
 
         // GET: /Noticias/Detalle/{id}
@@ -40,7 +38,10 @@ namespace API_PRACTICA3_MVC.Controllers
             {
                 var post = await _servicio.ObtenerPost(id);
                 if (post == null)
-                    return NotFound();
+                {
+                    TempData["Error"] = "La publicación no existe o no se pudo cargar.";
+                    return RedirectToAction("Indice");
+                }
 
                 var usuario = await _servicio.ObtenerUsuario(post.UserId);
                 var comentarios = await _servicio.ObtenerComentarios(id);
@@ -52,9 +53,9 @@ namespace API_PRACTICA3_MVC.Controllers
 
                 return View(post);
             }
-            catch (Exception)
+            catch
             {
-                TempData["Error"] = "Error al cargar los detalles de la publicación.";
+                TempData["Error"] = "Ocurrió un error al cargar la publicación.";
                 return RedirectToAction("Indice");
             }
         }
@@ -65,7 +66,7 @@ namespace API_PRACTICA3_MVC.Controllers
         {
             if (string.IsNullOrEmpty(tipo) || (tipo != "like" && tipo != "dislike"))
             {
-                TempData["Error"] = "Reacción no válida.";
+                TempData["Error"] = "Reacción inválida.";
                 return RedirectToAction("Detalle", new { id = postId });
             }
 
