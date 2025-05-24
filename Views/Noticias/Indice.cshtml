@@ -1,0 +1,18 @@
+@model List<API_PRACTICA3_MVC.Models.Post>
+
+@{
+    ViewData["Title"] = "Noticias";
+}
+
+<h2>Noticias recientes</h2>
+
+<ul>
+@foreach (var post in Model)
+{
+    <li>
+        <h4>@post.Title</h4>
+        <p>@post.Body.Substring(0, Math.Min(100, post.Body.Length))...</p>
+        <a class="btn btn-primary" asp-controller="Noticias" asp-action="Detalle" asp-route-id="@post.Id">Leer más</a>
+    </li>
+}
+</ul>

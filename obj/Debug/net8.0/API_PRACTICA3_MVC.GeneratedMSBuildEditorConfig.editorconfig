@@ -26,20 +26,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\RONALD\Desktop\Programacion\API_Practica3\API_PRACTICA3_MVC
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/RONALD/Desktop/Programacion/API_Practica3/API_PRACTICA3_MVC/Views/Home/Privacidad.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWNpZGFkLmNzaHRtbA==
+[C:/Users/RONALD/Desktop/Programacion/API_Practica3/API_PRACTICA3_MVC/Views/Home/Indice.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRpY2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RONALD/Desktop/Programacion/API_Practica3/API_PRACTICA3_MVC/Views/Home/Índice.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVzDjW5kaWNlLmNzaHRtbA==
+[C:/Users/RONALD/Desktop/Programacion/API_Practica3/API_PRACTICA3_MVC/Views/Home/Privacidad.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWNpZGFkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/RONALD/Desktop/Programacion/API_Practica3/API_PRACTICA3_MVC/Views/Noticias/Detalle.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWNpYXNcRGV0YWxsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RONALD/Desktop/Programacion/API_Practica3/API_PRACTICA3_MVC/Views/Noticias/Índice.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWNpYXNcw41uZGljZS5jc2h0bWw=
+[C:/Users/RONALD/Desktop/Programacion/API_Practica3/API_PRACTICA3_MVC/Views/Noticias/Indice.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWNpYXNcSW5kaWNlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/RONALD/Desktop/Programacion/API_Practica3/API_PRACTICA3_MVC/Views/Shared/Error.cshtml]

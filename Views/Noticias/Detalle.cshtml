@@ -1,0 +1,44 @@
+@model API_PRACTICA3_MVC.Models.Post
+
+@{
+    ViewData["Title"] = "Detalle de Noticia";
+    var autor = ViewData["Usuario"] as API_PRACTICA3_MVC.Models.Usuario;
+    var comentarios = ViewData["Comentarios"] as List<API_PRACTICA3_MVC.Models.Comentario>;
+    var feedback = ViewData["Feedback"] as string;
+}
+
+<h2>@Model.Title</h2>
+
+<p>@Model.Body</p>
+
+<h4>Autor</h4>
+<p><strong>@autor?.Name</strong> - @autor?.Email</p>
+
+<h4>Comentarios</h4>
+@if (comentarios != null && comentarios.Any())
+{
+    <ul>
+    @foreach (var c in comentarios)
+    {
+        <li><strong>@c.Name</strong> (@c.Email): @c.Body</li>
+    }
+    </ul>
+}
+else
+{
+    <p>No hay comentarios para esta publicación.</p>
+}
+
+<h4>Reacción del usuario</h4>
+@if (feedback == null)
+{
+    <form asp-action="Reaccionar" method="post">
+        <input type="hidden" name="postId" value="@Model.Id" />
+        <button class="btn btn-success" type="submit" name="tipo" value="like">👍 Me gustó</button>
+        <button class="btn btn-danger" type="submit" name="tipo" value="dislike">👎 No me gustó</button>
+    </form>
+}
+else
+{
+    <p><strong>Tu reacción:</strong> @feedback</p>
+}
